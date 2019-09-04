@@ -56,6 +56,8 @@ func DataTypes() {
 	fmt.Printf("%b \n", 25)
 	fmt.Printf("%c \n", 34)
 	fmt.Printf("%x \n", 15)
+	fmt.Printf(" '5 mod 2' = %d \n", 5%2)
+	fmt.Printf(" '4 mod  2' = %d \n", 4%2)
 }
 
 func SimpleHttpServer() {
