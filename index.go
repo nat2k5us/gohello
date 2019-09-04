@@ -3,6 +3,9 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"github.com/gorilla/mux"
+	"log"
+	
 )
 
 func main() {
@@ -14,6 +17,7 @@ func main() {
 	ConditionalStatements(17)
 	CaseStateMents(18)
 	//SimpleHttpServer()
+	StartRestApiServices()
 
 }
 
@@ -67,4 +71,21 @@ func SimpleHttpServer() {
 
 func HelloServer(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "<h1>Hello from Go on Now!</h1>")
+}
+
+func TestEndPoint(w http.ResponseWriter, req *http.Request) {
+	fmt.Fprintln(w, "testing server - server is running !!!")
+}
+
+func StartRestApiServices(){
+	fmt.Println("Strating application")
+	log.Print("Starting Go Server at http://localhost:8011")
+	router := mux.NewRouter()
+
+	router.HandleFunc("/test", TestEndPoint).Methods("GET")
+	//router.HandleFunc("/projects", GetProjectsDataEndPoint).Methods("GET")
+	//router.HandleFunc("/project/{projectid}", GetProjectEndPoint).Methods("GET")
+	//router.HandleFunc("/project/{projectid}", CreateProjectEndPoint).Methods("POST")
+	//router.HandleFunc("/project/{projectid}", DeleteProjectEndPoint).Methods("DELETE")
+	log.Fatal(http.ListenAndServe(":8011", router))
 }
